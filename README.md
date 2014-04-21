@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mapbox/extent.svg)](https://travis-ci.org/mapbox/extent)
+
 # extent
 
 a simple geographical extent
