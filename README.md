@@ -2,7 +2,7 @@
 
 # extent
 
-a simple geographical extent
+A simple geographical extent.
 
 ## api
 
@@ -21,4 +21,9 @@ Expand the extent to include another extent.
 ### `extent.bbox()`
 
 Get the extent's value. `null` if no points have
-been included yet.
+been included yet. Order is `[WSEN]` to match the [GeoJSON](http://geojson.org/)
+standard.
+
+### `extent.polygon()`
+
+Get the extent as a [GeoJSON](http://geojson.org/) Polygon geometry object.

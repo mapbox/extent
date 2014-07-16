@@ -17,5 +17,13 @@ test('extent', function(t) {
         .include([-10, -10])
         .bbox(),
             [-10, -10, 10, 10], 'three points');
+    t.deepEqual(Extent()
+        .include([0, 0])
+        .include([10, 10])
+        .include([-10, -10])
+        .polygon(), {
+            type: 'Polygon',
+            coordinates: [[[-10,-10],[10,-10],[10,10],[-10,10],[-10,-10]]]
+        }, 'polygon');
     t.end();
 });

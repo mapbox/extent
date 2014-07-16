@@ -30,3 +30,24 @@ Extent.prototype.bbox = function() {
     if (!this._valid) return null;
     return this._bbox;
 };
+
+Extent.prototype.polygon = function() {
+    if (!this._valid) return null;
+    return {
+        type: 'Polygon',
+        coordinates: [
+            [
+                // W, S
+                [this._bbox[0], this._bbox[1]],
+                // E, S
+                [this._bbox[2], this._bbox[1]],
+                // E, N
+                [this._bbox[2], this._bbox[3]],
+                // W, N
+                [this._bbox[0], this._bbox[3]],
+                // W, S
+                [this._bbox[0], this._bbox[1]]
+            ]
+        ]
+    };
+};
