@@ -36,13 +36,23 @@ test('extent', function(t) {
     t.deepEqual(Extent()
         .include([0, 0])
         .include([10, 10])
-        .contains([5, 5]),
-        true, 'contains - true, has size');
+        .contains()([5, 5]),
+        true, 'fast contains - true, has size');
     t.deepEqual(Extent()
         .include([0, 0])
         .include([10, 10])
         .contains([15, 15]),
         false, 'contains - false, has size');
+    t.deepEqual(Extent()
+        .include([0, 0])
+        .include([10, 10])
+        .contains([15, 15]),
+        false, 'contains - false, has size');
+    t.deepEqual(Extent()
+        .include([0, 0])
+        .include([10, 10])
+        .contains()([15, 15]),
+        false, 'fast contains - false, has size');
     t.deepEqual(Extent()
         .include([0, 0])
         .include([10, 10])

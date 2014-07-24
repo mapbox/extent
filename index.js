@@ -32,11 +32,22 @@ Extent.prototype.bbox = function() {
 };
 
 Extent.prototype.contains = function(ll) {
+    if (!ll) return this._fastContains();
     if (!this._valid) return null;
     return this._bbox[0] <= ll[0] &&
         this._bbox[1] <= ll[1] &&
         this._bbox[2] >= ll[0] &&
         this._bbox[3] >= ll[1];
+};
+
+Extent.prototype._fastContains = function() {
+    if (!this._valid) return new Function('return null;');
+    var body = 'return ' +
+        this._bbox[0] + '<= ll[0] &&' +
+        this._bbox[1] + '<= ll[1] &&' +
+        this._bbox[2] + '>= ll[0] &&' +
+        this._bbox[3] + '>= ll[1]';
+    return new Function('ll', body);
 };
 
 Extent.prototype.polygon = function() {

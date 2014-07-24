@@ -33,3 +33,9 @@ Get the extent as a [GeoJSON](http://geojson.org/) Polygon geometry object.
 Returns `true` if this extent contains the given point, and false if not. Points
 on the boundary of the extent are considered to be contained. If the extent is
 invalid, returns `null`.
+
+### `extent.contains()`
+
+Returns a function that evaluates whether points are contained in the extent -
+same behavior as `.contains([lon, lat])`. This pre-compiles the function with the
+current extent values, yielding a roughly 3x speedup.
