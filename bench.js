@@ -1,5 +1,6 @@
 var Benchmark = require('benchmark');
 global.Extent = require('./');
+global.pip = require('point-in-polygon');
 
 var suite = new Benchmark.Suite();
 
@@ -9,28 +10,32 @@ suite
     name: 'contains',
     fn: function() {
          ext.contains([0, 10]);
-         invalidExt.contains([0, 10]);
     },
     setup: function() {
         var ext = global.Extent()
             .include([0, 0])
             .include([10, 10]);
-        var invalidExt = global.Extent()
+    }
+})
+.add({
+    name: 'pip',
+    fn: function() {
+         global.pip([0, 10], extG);
+    },
+    setup: function() {
+        var extG = global.Extent()
             .include([0, 0])
-            .include([10, 10]);
+            .include([10, 10])
+            .polygon();
     }
 })
 .add({
     name: 'fastContains',
     fn: function() {
         extContains([0, 10]);
-        invalidExtContains([0, 10]);
     },
     setup: function() {
         var extContains = global.Extent()
-            .include([0, 0])
-            .include([10, 10]).contains();
-        var invalidExtContains = global.Extent()
             .include([0, 0])
             .include([10, 10]).contains();
     }
