@@ -31,6 +31,14 @@ Extent.prototype.bbox = function() {
     return this._bbox;
 };
 
+Extent.prototype.contains = function(ll) {
+    if (!this._valid) return null;
+    return this._bbox[0] <= ll[0] &&
+        this._bbox[1] <= ll[1] &&
+        this._bbox[2] >= ll[0] &&
+        this._bbox[3] >= ll[1];
+};
+
 Extent.prototype.polygon = function() {
     if (!this._valid) return null;
     return {
