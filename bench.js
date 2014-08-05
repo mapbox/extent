@@ -26,7 +26,7 @@ suite
         var extG = global.Extent()
             .include([0, 0])
             .include([10, 10])
-            .polygon();
+            .polygon().coordinates;
     }
 })
 .add({

@@ -61,5 +61,39 @@ test('extent', function(t) {
             type: 'Polygon',
             coordinates: [[[-10,-10],[10,-10],[10,10],[-10,10],[-10,-10]]]
         }, 'polygon');
+    t.equal(Extent().contains()([0, 0]), null, 'fast contains - invalid');
+    t.equal(Extent().polygon(), null, 'polygon - invalid');
+
+    t.test('union', function(t) {
+        var a = Extent()
+            .include([0, 0])
+            .include([10, 10]);
+        var b = Extent()
+            .include([0, 0])
+            .include([-10, -10]);
+        var c = Extent()
+            .include([10, 10])
+            .include([-10, -10]);
+        t.equal(a.equals(c), false, 'union - before');
+        t.equal(a.union(b).equals(c), true, 'union');
+        t.end();
+    });
+
+    t.test('union - bbox', function(t) {
+        var a = Extent()
+            .include([0, 0])
+            .include([10, 10]);
+        var b = Extent()
+            .include([0, 0])
+            .include([-10, -10]);
+        var c = Extent()
+            .include([10, 10])
+            .include([-10, -10]);
+        t.equal(a.equals(c), false, 'union - before');
+        t.equal(a.equals(c.bbox()), false, 'union - before');
+        t.equal(a.union(b.bbox()).equals(c), true, 'union');
+        t.end();
+    });
+
     t.end();
 });

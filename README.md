@@ -14,9 +14,13 @@ Create a new extent object
 
 Expand the extent to include a lon, lat point.
 
-### `extent.union([wsen])`
+### `extent.union([w, s, e, n] or other extent)`
 
 Expand the extent to include another extent.
+
+### `extent.equals([w, s, e, n] or other extent)`
+
+Whether this extent is exactly equal to another.
 
 ### `extent.bbox()`
 

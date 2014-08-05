@@ -17,8 +17,19 @@ Extent.prototype.include = function(ll) {
     return this;
 };
 
-Extent.prototype.union = function(other) {
+Extent.prototype.equals = function(_) {
+    var other;
+    if (_ instanceof Extent) { other = _.bbox(); } else { other = _; }
+    return this._bbox[0] == other[0] &&
+        this._bbox[1] == other[1] &&
+        this._bbox[2] == other[2] &&
+        this._bbox[3] == other[3];
+};
+
+Extent.prototype.union = function(_) {
     this._valid = true;
+    var other;
+    if (_ instanceof Extent) { other = _.bbox(); } else { other = _; }
     this._bbox[0] = Math.min(this._bbox[0], other[0]);
     this._bbox[1] = Math.min(this._bbox[1], other[1]);
     this._bbox[2] = Math.max(this._bbox[2], other[2]);
@@ -34,10 +45,11 @@ Extent.prototype.bbox = function() {
 Extent.prototype.contains = function(ll) {
     if (!ll) return this._fastContains();
     if (!this._valid) return null;
-    return this._bbox[0] <= ll[0] &&
-        this._bbox[1] <= ll[1] &&
-        this._bbox[2] >= ll[0] &&
-        this._bbox[3] >= ll[1];
+    var lon = ll[0], lat = ll[1];
+    return this._bbox[0] <= lon &&
+        this._bbox[1] <= lat &&
+        this._bbox[2] >= lon &&
+        this._bbox[3] >= lat;
 };
 
 Extent.prototype._fastContains = function() {
