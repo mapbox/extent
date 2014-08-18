@@ -26,6 +26,13 @@ Extent.prototype.equals = function(_) {
         this._bbox[3] == other[3];
 };
 
+Extent.prototype.center = function(_) {
+    if (!this._valid) return null;
+    return [
+        (this._bbox[0] + this._bbox[2]) / 2,
+        (this._bbox[1] + this._bbox[3]) / 2]
+};
+
 Extent.prototype.union = function(_) {
     this._valid = true;
     var other;

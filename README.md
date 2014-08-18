@@ -28,6 +28,10 @@ Get the extent's value. `null` if no points have
 been included yet. Order is `[WSEN]` to match the [GeoJSON](http://geojson.org/)
 standard.
 
+### `extent.center()`
+
+Get the centerpoint of the extent as a `[longitude, latitude]` array.
+
 ### `extent.polygon()`
 
 Get the extent as a [GeoJSON](http://geojson.org/) Polygon geometry object.

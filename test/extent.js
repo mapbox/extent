@@ -95,5 +95,20 @@ test('extent', function(t) {
         t.end();
     });
 
+    t.test('center', function(t) {
+        t.deepEqual(Extent()
+            .include([0, 0])
+            .include([10, 10])
+            .center(), [5, 5]);
+        t.deepEqual(Extent()
+            .include([0, 0])
+            .center(), [0, 0]);
+        t.deepEqual(Extent()
+            .include([0, 0])
+            .include([10, 0])
+            .center(), [5, 0]);
+        t.end();
+    });
+
     t.end();
 });
