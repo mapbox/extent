@@ -1,3 +1,8 @@
+## 0.4.0
+
+* Added shortcut initializer with `[w, s, e, n]` coords.
+* Added `.intersect()` method
+
 ## 0.3.0
 
 * Added `.center()` method

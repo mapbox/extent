@@ -10,6 +10,10 @@ A simple geographical extent.
 
 Create a new extent object
 
+### `extent([w, s, e, n])`
+
+Create a new extent object, given bounds as an array.
+
 ### `extent.include([lon, lat])`
 
 Expand the extent to include a lon, lat point.

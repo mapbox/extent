@@ -1,11 +1,11 @@
 module.exports = Extent;
 
-function Extent() {
+function Extent(bbox) {
     if (!(this instanceof Extent)) {
-        return new Extent();
+        return new Extent(bbox);
     }
-    this._bbox = [Infinity, Infinity, -Infinity, -Infinity];
-    this._valid = false;
+    this._bbox = bbox || [Infinity, Infinity, -Infinity, -Infinity];
+    this._valid = !!bbox;
 }
 
 Extent.prototype.include = function(ll) {
@@ -57,6 +57,20 @@ Extent.prototype.contains = function(ll) {
         this._bbox[1] <= lat &&
         this._bbox[2] >= lon &&
         this._bbox[3] >= lat;
+};
+
+Extent.prototype.intersect = function(_) {
+    if (!this._valid) return null;
+
+    var other;
+    if (_ instanceof Extent) { other = _.bbox(); } else { other = _; }
+
+    return !(
+      this._bbox[0] > other[2] ||
+      this._bbox[2] < other[0] ||
+      this._bbox[3] < other[1] ||
+      this._bbox[1] > other[3]
+    );
 };
 
 Extent.prototype._fastContains = function() {

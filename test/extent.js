@@ -112,3 +112,13 @@ test('extent', function(t) {
 
     t.end();
 });
+
+test('intersect', function(t) {
+	var bbox1 = [0,0,1,1];
+	var bbox2 = [0.5,0.5,2,2];
+
+	t.equals(Extent(bbox1).intersect(bbox2), true);
+	t.equals(Extent(bbox2).intersect(bbox1), true)
+
+	t.end()
+})
